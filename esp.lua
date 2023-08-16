@@ -800,31 +800,6 @@ Options('ChangeColors', SENTINEL_LOADED and 'Sentinel Unsupported' or 'Change Co
 		};
 	});
 end, 2);
-Options('ResetSettings', 'Reset Settings', function()
-	for i, v in pairs(Options) do
-		if Options[i] ~= nil and Options[i].Value ~= nil and Options[i].Text ~= nil and (typeof(Options[i].Value) == 'boolean' or typeof(Options[i].Value) == 'number' or typeof(Options[i].Value) == 'EnumItem') then
-			Options[i](Options[i].DefaultValue, true);
-		end
-	end
-end, 5);
-Options('LoadSettings', 'Load Settings', Load, 4);
-Options('SaveSettings', 'Save Settings', function()
-	local COptions = {};
-
-	for i, v in pairs(Options) do
-		COptions[i] = v;
-	end
-	
-	if typeof(TeamColor) == 'Color3' then COptions.TeamColor = { R = TeamColor.R; G = TeamColor.G; B = TeamColor.B } end
-	if typeof(EnemyColor) == 'Color3' then COptions.EnemyColor = { R = EnemyColor.R; G = EnemyColor.G; B = EnemyColor.B } end
-	
-	if typeof(COptions.MenuKey.Value) == 'EnumItem' then COptions.MenuKey = COptions.MenuKey.Value.Name end
-	if typeof(COptions.ToggleKey.Value) == 'EnumItem' then COptions.ToggleKey = COptions.ToggleKey.Value.Name end
-
-	writefile(OptionsFile, HttpService:JSONEncode(COptions));
-end, 3);
-
-Load(1);
 
 Options('MenuOpen', nil, true);
 
